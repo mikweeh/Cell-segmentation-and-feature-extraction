@@ -20,7 +20,7 @@ The folder scheme is as follows:
 
 * unetpp_2ldice.pth: Trained model. It is a U-Net++ model that is based on the Dice coefficient of 2 of the 3 channels of the mask.
 
-# ¿What to do?
+# What to do?
 
 This document reflects what can be done with the scripts in this repository. Basically, the work carried out as the final thesis of the Master in Bioinformatics and Biostatistics can be fully reproduced.
 
