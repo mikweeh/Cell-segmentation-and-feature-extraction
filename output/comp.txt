@@ -1,0 +1,27 @@
+Model: DeepLabV3Plus efficientnet-b6
+Dice coefficient: 0.9474924346979927
+
+Model: MAnet timm-efficientnet-b6
+Dice coefficient: 0.9464333302834455
+
+Model: UnetPlusPlus efficientnet-b6
+Dice coefficient: 0.9497126354014173
+
+Model: Unet timm-efficientnet-b6
+Dice coefficient: 0.9496209044374672
+
+Model: U2Net 
+Dice coefficient: 0.9428161388518763
+
+Model: PAN efficientnet-b6
+Dice coefficient: 0.9493300441433402
+
+Model: FPN timm-efficientnet-b6
+Dice coefficient: 0.9471898753853405
+
+Model: PSPNet timm-efficientnet-b6
+Dice coefficient: 0.942041762757535
+
+Model: Linknet timm-efficientnet-b6
+Dice coefficient: 0.9006563550701329
+
