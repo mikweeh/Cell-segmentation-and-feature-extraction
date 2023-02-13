@@ -1,3 +1,11 @@
+# Abstract
+
+In recent years, with the rise of artificial intelligence and its strong entry into the world of biomedical imaging, the need to exchange knowledge not only from humans to machines, but also from machines to humans has become more and more relevant.
+
+We want a machine to be capable of performing tasks related to data processing in health sciences, and that these tasks become increasingly complex, even reaching the point of equaling or exceeding the capabilities of the best experts in the field. However, the flow of information does not always have to go in the same direction (from human expert knowledge to machines) but it can also circulate in the opposite direction, increasingly helping experts to understand non-intuitive patterns (or that are not immediately apparent), and to describe these patterns based on reasonably familiar metrics.
+
+One of the most criticized aspects of deep neural networks is that the knowledge created is not easily interpretable, but their capacity is far from any doubt. Thus, this work develops an automatic process of semantic segmentation of mononuclear cells present in medical images of peripheral blood taken under a microscope. Once the segmentation is done, a series of image features corresponding to the segmented areas are extracted. This features are displayed in an easy-to-use app, so that the pathologist themselves can find relationships and patterns with morphological parameters, and thus understand more clearly aspects of the information with which they work.
+
 # Mononucleated cells feature extractor
 
 In this repository you will find a folder scheme with various scripts.
