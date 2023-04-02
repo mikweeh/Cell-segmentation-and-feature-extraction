@@ -31,6 +31,7 @@ random.seed(SEED)
 PROJECT_DIR = str(pathlib.Path().resolve())
 sys.path.append(PROJECT_DIR)
 import custom_utils as h
+from mymodels import SegDataset
 
 
 ###############################################################################
@@ -49,70 +50,6 @@ DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 IM_SIZE = 224
 KFOLD = 10
 num_workers = 0
-
-
-###############################################################################
-# The dataset class
-###############################################################################
-
-class SegDataset(Dataset):
-    def __init__(self, image_paths, mask_paths, transformations=None,
-                 num_class=2):
-        # Store the image and mask filepaths, and augmentation transforms
-        self.image_paths = image_paths
-        self.mask_paths = mask_paths
-        self.transforms = transformations
-        self.num_class = num_class
-
-    def __len__(self):
-        # Return the number of total samples contained in the dataset
-        return len(self.image_paths)
-
-    def __getitem__(self, idx):
-        # Grab the image path from the current index
-        im_path = self.image_paths[idx]
-        # Load the image with PIL as numpy array
-        im = np.array(Image.open(im_path))
-        # Read mask with PIL as numpy array
-        ms_path = self.mask_paths[idx]
-        mk = np.array(Image.open((ms_path)))
-
-        # Apply albumentations transforms
-        augmented = self.transforms(image=im, mask=mk)
-        image = augmented['image']
-        mask = augmented['mask']
-
-        # Convert flat mask to deep mask (one channel per class)
-        mask = self.__deep_mask__(mask)
-
-        # return a tuple of the image and its mask as tensors
-        return (to_tensor(image), to_tensor(mask))
-
-    def __deep_mask__(self, mask):
-        # Convert a flat grayscale mask into a channeled grayscale mask
-
-        # Convert a np mask with a grayscale format (H x W) with value range
-        # 0-255 (equally spaced; i.e. 2 classes + background would be 0, 127,
-        # 255) to a numpy mask (H x W x C) with C equal to number of channels
-        # (classes) with 255 in the active pixels and 0 otherwise (uint8
-        # format)
-
-        # Number of different levels
-        nlevels = self.num_class
-
-        # Mask arrives with 255 gray levels equaly spaced
-        mask = np.round(mask / (255 / nlevels))
-
-        # Leave each level in a channel
-        masks = []
-        for k in range(nlevels):
-            base = np.zeros_like(mask, dtype=np.uint8)
-            ix = np.argwhere(mask == (k + 1))
-            base[ix[:, 0], ix[:, 1]] = 255
-            masks.append(base)
-
-        # Stack all channels
-        return np.stack(masks, axis=2)
 
 
 ###############################################################################
